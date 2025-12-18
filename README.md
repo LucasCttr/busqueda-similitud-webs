@@ -29,3 +29,4 @@ npx ng serve --open
 Notas:
 - El endpoint del frontend asume que la API está disponible en `/api/*`. Para desarrollo configure un proxy o use rutas absolutas `http://localhost:8000`.
 - La búsqueda por similitud aún no está implementada; el endpoint `/search` devuelve resultados de ejemplo.
+- Este repositorio incluye una carpeta /sitios/ (~100 MB) con imágenes de prueba para facilitar la reproducción.
