@@ -1,0 +1,29 @@
+<div class="results-section" *ngIf="results.length > 0">
+  <div class="results-header">
+    <h2 class="results-title">Resultados de Búsqueda</h2>
+    <span class="results-count">{{ results.length }} imágenes encontradas</span>
+  </div>
+  <div class="results-grid">
+    <div *ngFor="let result of results" class="result-card">
+      <div class="result-image-placeholder" (click)="openImage(result)">
+        <img [src]="result.url" [alt]="result.path" />
+      </div>
+      <div class="result-info">
+        <p class="result-filename">{{ fileName(result.path) }}</p>
+        <p class="result-score">Distancia: {{ result.distance | number:'1.3-3' }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal para imagen ampliada -->
+<div class="image-modal" *ngIf="selectedImage" (click)="closeImage()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <button class="close-button" (click)="closeImage()">&times;</button>
+    <img [src]="selectedImage.url" [alt]="selectedImage.path" class="modal-image" />
+    <div class="modal-info">
+      <p class="modal-filename">{{ fileName(selectedImage.path) }}</p>
+      <p class="modal-distance">Distancia: {{ selectedImage.distance | number:'1.4-4' }}</p>
+    </div>
+  </div>
+</div>

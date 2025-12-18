@@ -1,0 +1,80 @@
+<div class="search-container">
+  <h2>Buscar Imágenes Similares</h2>
+  
+  <div class="search-input-section">
+    <div class="upload-area">
+      <input 
+        type="file" 
+        (change)="onFileSelected($event)" 
+        accept="image/*"
+        id="searchFileInput"
+        class="file-input"
+      />
+      <label for="searchFileInput" class="file-label">
+        <span class="search-icon">🔍</span>
+        <span>Seleccionar imagen para buscar</span>
+      </label>
+    </div>
+
+    <div *ngIf="previewUrl" class="preview-container" (click)="openPreview()">
+      <img [src]="previewUrl" alt="Preview" class="preview-image">
+      <p class="preview-filename">{{ selectedFile?.name }}</p>
+    </div>
+
+    <!-- Modal de previsualización ampliada -->
+    <div class="preview-modal" *ngIf="showPreview" (click)="closePreview()">
+      <div class="modal-content" (click)="$event.stopPropagation()">
+        <button type="button" class="close-button" (click)="closePreview()">&times;</button>
+        <img [src]="previewUrl" alt="Preview" class="modal-image" />
+      </div>
+    </div>
+
+    <div class="radius-control">
+      <label for="radiusInput">Radio de búsqueda</label>
+      <div class="radius-inputs">
+        <input
+          id="radiusInput"
+          type="range"
+          min="0.01"
+          max="5"
+          step="0.01"
+          [(ngModel)]="radius"
+        />
+        <input
+          type="number"
+          min="0.01"
+          max="5"
+          step="0.01"
+          [(ngModel)]="radius"
+          class="radius-number"
+        />
+        <span class="radius-unit">distancia</span>
+      </div>
+    </div>
+
+    <div class="action-buttons">
+      <button 
+        (click)="onSearch()" 
+        [disabled]="!selectedFile || isSearching"
+        class="search-button"
+      >
+        <span *ngIf="!isSearching">Buscar</span>
+        <span *ngIf="isSearching">Buscando...</span>
+      </button>
+      
+      <button 
+        *ngIf="selectedFile"
+        (click)="clearSearch()" 
+        class="clear-button"
+      >
+        Limpiar
+      </button>
+    </div>
+
+    <div *ngIf="searchStatus" class="status-message" 
+         [class.error]="searchStatus.includes('Error')"
+         [class.success]="searchStatus.includes('encontraron')">
+      {{ searchStatus }}
+    </div>
+  </div>
+</div>
