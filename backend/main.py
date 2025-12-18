@@ -52,28 +52,21 @@ def _clean_dataset_and_index():
     Limpia el dataset y el índice FAISS eliminando entradas cuyos archivos no existen.
     Persiste el resultado limpio en el pickle y el índice FAISS.
     """
-    global dataset_features, dataset_paths, index
+    global dataset_features, dataset_paths
     valid_feats = []
     valid_paths = []
-    skipped = 0
     for feat, path in zip(dataset_features, dataset_paths):
         fname = Path(path).name
         rel = str(Path("sitios") / fname).replace("\\", "/")
-
-    if skipped:
-        print(f"[LOAD CLEAN] Reconstruyendo índice con {len(valid_feats)} de {len(dataset_features)}")
-        dim = valid_feats[0].shape[0]
-        new_index = faiss.IndexFlatL2(dim)
-        feats_arr = np.array(valid_feats, dtype="float32")
-        new_index.add(feats_arr)
-        dataset_features = feats_arr
-        dataset_paths = valid_paths
-        index = new_index
-        with open(Path(__file__).parent / "models/dataset_1_Layers_avg_pool.pkl", "wb") as f:
-            pickle.dump({"features": dataset_features, "paths": dataset_paths}, f)
-        faiss.write_index(index, str(INDEX_PATH))
-    else:
-        dataset_paths = valid_paths
+        full_path = Path(__file__).parent / rel
+        if full_path.exists():
+            valid_feats.append(feat)
+            valid_paths.append(path)
+        else:
+            print(f"[CLEAN] Eliminando entrada sin archivo físico: {path}")
+    # Solo actualiza en memoria, no persiste ni reconstruye el índice
+    dataset_features = valid_feats
+    dataset_paths = valid_paths
 
 _clean_dataset_and_index()
 
@@ -203,6 +196,17 @@ async def search_image(
 
         return {"results": results}
     except Exception as e:
+        import traceback
+        print("\n========== [SEARCH ERROR] ==========")
+        print(f"Archivo recibido: {getattr(file, 'filename', None)}")
+        print(f"Request: {request.method} {request.url}")
+        print(f"Error: {str(e)}")
+        print("Traceback:")
+        traceback.print_exc()
+        print(f"dataset_features: {len(dataset_features) if 'dataset_features' in globals() else 'N/A'}")
+        print(f"dataset_paths: {len(dataset_paths) if 'dataset_paths' in globals() else 'N/A'}")
+        print(f"Index size: {index.ntotal if 'index' in globals() else 'N/A'}")
+        print("====================================\n")
         raise HTTPException(status_code=500, detail=str(e))
 
 
