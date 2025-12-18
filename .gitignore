@@ -1,0 +1,3 @@
+# Ignorar datasets e índices locales
+dataset_1_Layers_avg_pool.pkl
+faiss_index.idx

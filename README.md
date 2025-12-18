@@ -30,3 +30,4 @@ Notas:
 - El endpoint del frontend asume que la API está disponible en `/api/*`. Para desarrollo configure un proxy o use rutas absolutas `http://localhost:8000`.
 - La búsqueda por similitud aún no está implementada; el endpoint `/search` devuelve resultados de ejemplo.
 - Este repositorio incluye una carpeta /sitios/ (~100 MB) con imágenes de prueba para facilitar la reproducción.
+- El proyecto incorpora **archivos base** en la carpeta `/models/modelos_base/`. Estos archivos sirven como referencia inicial para asegurar que todos los usuarios tengan la misma estructura al clonar el repositorio. Para utilizarlos, cópielos a la carpeta `models/` y renómbrelos eliminando el sufijo `_BASE`.
