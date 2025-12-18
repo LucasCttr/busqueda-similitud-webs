@@ -32,6 +32,8 @@ import shutil
 import uuid
 import faiss, pickle, numpy as np
 from features.features import extract_mixed_features, _ensure_model
+from io import BytesIO
+from PIL import Image
 
 _ensure_model()  # Inicializa el modelo de features al arrancar
 # Cargar índice FAISS
@@ -149,8 +151,6 @@ async def upload_image(file: UploadFile = File(...)):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-from io import BytesIO
-from PIL import Image
 
 @app.post('/search')
 async def search_image(

@@ -2,7 +2,7 @@ Proyecto: Image Search (Frontend Angular + Backend FastAPI)
 
 Estructura:
 - frontend/: proyecto Angular básico (componentes para subir y buscar imagenes)
-- backend/: API en FastAPI con endpoints `/upload` y `/search` (placeholder)
+- backend/: API en FastAPI con endpoints `/upload` y `/search` 
 
 Instrucciones rápidas:
 
