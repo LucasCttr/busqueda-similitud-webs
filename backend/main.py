@@ -37,7 +37,7 @@ from PIL import Image
 
 _ensure_model()  # Inicializa el modelo de features al arrancar
 # Cargar índice FAISS
-INDEX_PATH = Path(__file__).parent / "models/faiss_index.idx"
+INDEX_PATH = Path(__file__).parent / "models/faiss_index_f.idx"
 index = faiss.read_index(str(INDEX_PATH))
 
 # Cargar features y paths
@@ -57,13 +57,14 @@ def _clean_dataset_and_index():
     valid_paths = []
     for feat, path in zip(dataset_features, dataset_paths):
         fname = Path(path).name
-        rel = str(Path("sitios") / fname).replace("\\", "/")
+        rel_dir = Path("sitios/") if not("sitios" in fname) else Path("")
+        rel = str(rel_dir / fname).replace("\\", "/")
         full_path = Path(__file__).parent / rel
         if full_path.exists():
             valid_feats.append(feat)
             valid_paths.append(path)
         else:
-            print(f"[CLEAN] Eliminando entrada sin archivo físico: {path}")
+            print(f"[CLEAN] Eliminando entrada sin archivo físico: {full_path}")
     # Solo actualiza en memoria, no persiste ni reconstruye el índice
     dataset_features = valid_feats
     dataset_paths = valid_paths
