@@ -6,6 +6,16 @@ Estructura:
 
 Instrucciones rápidas:
 
+Levantar aplicación con Docker:
+
+```
+docker-compose up --build
+```
+
+Navegar a http://localhost:4200 para el frontend.
+
+Levantar aplicación de forma manual:
+
 Backend:
 1. Abrir terminal en `backend`
 2. Crear y activar un entorno virtual (opcional)
