@@ -3,7 +3,7 @@
   max-width: 1400px;
   margin: 40px auto 60px auto;
   padding: 30px;
-  background: #ffffff;
+  background: var(--panel);
   border-radius: 12px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
@@ -17,15 +17,14 @@
 
 .results-title {
   font-size: 2rem;
-  color: #333;
   margin: 0 0 10px 0;
   font-weight: 600;
 }
 
 .results-count {
   display: inline-block;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
+  background: var(--text);
+  color: var(--bg);
   padding: 8px 20px;
   border-radius: 20px;
   font-weight: 500;
@@ -42,12 +41,11 @@
 }
 
 .result-card {
-  background: #ffffff;
+  background: var(--panel);
   border-radius: 12px;
-  padding: 15px;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+  border: 1px solid var(--border);
   transition: all 0.3s ease;
-  border: 2px solid transparent;
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -67,8 +65,7 @@
   align-items: center;
   justify-content: center;
   background: #f8f9fa;
-  border-radius: 8px;
-  margin-bottom: 12px;
+  border-radius: 8px 8px 0 0;  
   cursor: pointer;
   transition: opacity 0.2s ease;
   flex-shrink: 0;
@@ -91,6 +88,8 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  background-color: var(--bg);
+  border-radius: 0 0 12px 12px;
 }
 
 .result-filename {
@@ -138,7 +137,7 @@
   position: relative;
   max-width: 85%;
   max-height: 85%;
-  background: white;
+  background: var(--panel);
   border-radius: 12px;
   padding: 40px;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);

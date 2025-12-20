@@ -97,7 +97,7 @@ export class SearchComponent {
         this.isSearching = false;
         this.searchStatus = data.results.length > 0
           ? `Se encontraron ${data.results.length} imágenes similares`
-          : 'No se encontraron imágenes similares';
+          : 'No se encontraron imágenes similares. Intenta aumentar el radio de búsqueda.';
       },
       error: (error) => {
         this.searchStatus = `Error en la búsqueda: ${error.message}`;
