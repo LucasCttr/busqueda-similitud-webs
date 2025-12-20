@@ -37,7 +37,7 @@ from PIL import Image
 
 _ensure_model()  # Inicializa el modelo de features al arrancar
 # Cargar índice FAISS
-INDEX_PATH = Path(__file__).parent / "models/faiss_index_f.idx"
+INDEX_PATH = Path(__file__).parent / "models/faiss_index.idx"
 index = faiss.read_index(str(INDEX_PATH))
 
 # Cargar features y paths
