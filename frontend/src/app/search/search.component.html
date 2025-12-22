@@ -2,7 +2,7 @@
   <h2>Buscar Imágenes Similares</h2>
   
   <div class="search-input-section">
-    <div class="upload-area">
+    <div class="upload-area" *ngIf="!previewUrl">
       <input 
         type="file" 
         (change)="onFileSelected($event)" 
@@ -11,14 +11,9 @@
         class="file-input"
       />
       <label for="searchFileInput" class="file-label">
-        <span class="search-icon">🔍</span>
+        <span class="material-symbols-outlined search-icon">add_photo_alternate</span>
         <span>Seleccionar imagen para buscar</span>
       </label>
-    </div>
-
-    <div *ngIf="previewUrl" class="preview-container" (click)="openPreview()">
-      <img [src]="previewUrl" alt="Preview" class="preview-image">
-      <p class="preview-filename">{{ selectedFile?.name }}</p>
     </div>
 
     <!-- Modal de previsualización ampliada -->
@@ -29,46 +24,67 @@
       </div>
     </div>
 
-    <div class="radius-control">
-      <label for="radiusInput">Radio de búsqueda</label>
-      <div class="radius-inputs">
-        <input
-          id="radiusInput"
-          type="range"
-          min="0.01"
-          max="5"
-          step="0.01"
-          [(ngModel)]="radius"
-        />
-        <input
-          type="number"
-          min="0.01"
-          max="5"
-          step="0.01"
-          [(ngModel)]="radius"
-          class="radius-number"
-        />
-        <span class="radius-unit">distancia</span>
+    <div class="search-config-panel">
+      <div *ngIf="previewUrl" class="preview-container search-config-left-panel" (click)="openPreview()">
+        <img [src]="previewUrl" alt="Preview" class="preview-image">
+        <hr />
+        <p class="preview-filename">{{ selectedFile?.name }}</p>
       </div>
-    </div>
 
-    <div class="action-buttons">
-      <button 
-        (click)="onSearch()" 
-        [disabled]="!selectedFile || isSearching"
-        class="search-button"
-      >
-        <span *ngIf="!isSearching">Buscar</span>
-        <span *ngIf="isSearching">Buscando...</span>
-      </button>
-      
-      <button 
-        *ngIf="selectedFile"
-        (click)="clearSearch()" 
-        class="clear-button"
-      >
-        Limpiar
-      </button>
+      <div class="search-config-right-panel">
+        <div class="radius-control">
+          <div class="radius-header">
+            <label for="radiusInput">Radio de búsqueda</label>
+
+            <div class="radius-number-container">
+            <span class="radius-unit">distancia: </span>
+              <input
+                type="number"
+                min="0.01"
+                max="5"
+                step="0.01"
+                [(ngModel)]="radius"
+                class="radius-number"
+              />
+            </div>
+          </div>
+          <div class="radius-inputs">
+            <span>0.01</span>
+            <input
+              id="radiusInput"
+              type="range"
+              min="0.01"
+              max="5"
+              step="0.01"
+              [(ngModel)]="radius"
+            />
+            <span>5</span>
+          </div>
+        </div>
+
+        <div class="action-buttons">
+          <button 
+            (click)="onSearch()" 
+            [disabled]="!selectedFile || isSearching"
+            class="search-button"
+          >
+            <span class="material-symbols-outlined" *ngIf="!isSearching">
+              search
+            </span>
+            <span *ngIf="!isSearching">Buscar</span>
+            <span *ngIf="isSearching">Buscando...</span>
+          </button>
+          
+          <button 
+            *ngIf="selectedFile"
+            (click)="clearSearch()" 
+            class="clear-button"
+          >
+            <span class="material-symbols-outlined">delete</span>
+            Limpiar
+          </button>
+        </div>
+      </div>
     </div>
 
     <div *ngIf="searchStatus" class="status-message" 

@@ -1,33 +1,45 @@
 <div class="upload-container">
-  <h2>Subir Imagen</h2>
-  
-  <div class="upload-area">
-    <input 
-      type="file" 
-      (change)="onFileSelected($event)" 
+  <h2>Subir Imagen al conjunto de datos a consultar</h2>
+
+  <div class="upload-area" *ngIf="!selectedFile">
+    <input
+      type="file"
+      (change)="onFileSelected($event)"
       accept="image/*"
       id="fileInput"
       class="file-input"
     />
     <label for="fileInput" class="file-label">
-      <span class="upload-icon">📁</span>
+      <span class="material-symbols-outlined upload-icon">add_photo_alternate</span>
       <span>Seleccionar imagen</span>
     </label>
   </div>
 
   <div *ngIf="selectedFile" class="file-info">
+    <img [src]="previewUrl" alt="Preview" class="preview-image" />
     <p>{{ selectedFile.name }}</p>
     <p class="file-size">{{ (selectedFile.size / 1024).toFixed(2) }} KB</p>
   </div>
 
-  <button 
-    (click)="onUpload()" 
-    [disabled]="!selectedFile || isUploading"
-    class="upload-button"
-  >
-    <span *ngIf="!isUploading">Subir Imagen</span>
-    <span *ngIf="isUploading">Subiendo...</span>
-  </button>
+  <div class="action-buttons">
+    <button 
+      (click)="onUpload()" 
+      [disabled]="!selectedFile || isUploading"
+      class="upload-button"
+    >
+      <span *ngIf="!isUploading">Subir Imagen</span>
+      <span *ngIf="isUploading">Subiendo...</span>
+    </button>
+
+    <button 
+      *ngIf="selectedFile"
+      (click)="clearUpload()" 
+      class="clear-button"
+    >
+      <span class="material-symbols-outlined">delete</span>
+      Limpiar
+    </button>
+  </div>
 
   <div *ngIf="uploadStatus" class="status-message" 
        [class.error]="uploadStatus.includes('Error')"

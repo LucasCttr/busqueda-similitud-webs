@@ -11,5 +11,5 @@ import { SearchResultsComponent } from './results/search-results.component';
   styleUrl: './app.css'
 })
 export class App {
-  protected readonly title = signal('Image Search App');
+  protected readonly title = signal('Sistema de búsqueda de imágenes por similitud');
 }

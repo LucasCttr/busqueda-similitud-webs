@@ -12,3 +12,73 @@ html, body {
   width: 100%;
   height: 100%;
 }
+
+:root {
+  --bg: #050505;       /* Almost black */
+  --panel: #121212;    /* Very dark gray for panels */
+  --border: #333333;   /* Subtle border color */
+  --disabled: #363636; /* Disabled elements */
+  --text: #e5e5e5;     /* Off-white text */
+  --muted: #888888;    /* Muted text */
+  --accent: #3b82f6;   /* Tech blue accent (subtle) */
+  --success: #10b981;  /* Terminal green */
+  --error: #ef4444;    /* Terminal red */
+}
+
+h2, h3, h4, h5, h6 {
+  color: var(--text);
+  text-transform: uppercase;
+}
+
+p, span, a, li, div {
+  color: var(--muted);
+}
+
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #050505; 
+}
+
+::-webkit-scrollbar-thumb {
+    background: #333; 
+    border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+}
+
+input[type=range] {
+    -webkit-appearance: none; 
+    background: transparent; 
+}
+
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 16px;
+    width: 8px;
+    border-radius: 1px;
+    background: #e5e5e5;
+    cursor: pointer;
+    margin-top: -6px; 
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 4px;
+    cursor: pointer;
+    background: #333;
+    border-radius: 0;
+}
+
+hr {
+  width: 90%;
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 10px;
+}
