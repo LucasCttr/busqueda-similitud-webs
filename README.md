@@ -1,4 +1,6 @@
-Proyecto: Image Search (Frontend Angular + Backend FastAPI)
+# Proyecto: Image Search (Frontend Angular + Backend FastAPI)
+Este proyecto implementa un sistema de **búsqueda por similitud** utilizando representaciones visuales de páginas web (landing pages en formato PNG).
+La aplicación permite subir una imagen de consulta y devuelve los 10 objetos más similares dentro de un radio de búsqueda, junto con la distancia calculada. Se utiliza **ResNet50** como extractor de características y se gestionan más de 1.200 imágenes de referencia, con un lote de 50 consultas para evaluar precisión en los resultados.
 
 Estructura:
 - frontend/: proyecto Angular básico (componentes para subir y buscar imagenes)
